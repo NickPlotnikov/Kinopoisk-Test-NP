@@ -10,7 +10,6 @@ class TestAPI:
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.title('Get movie information')
     def test_get_movie_info(self):
-        """Test to get movie information by ID."""
         response = requests.get(f"{API_URL}/movies/{MOVIE_ID}", headers={"X-API-KEY": TOKEN})
         assert response.status_code == 200
         data = response.json()
@@ -19,8 +18,7 @@ class TestAPI:
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Search movie by title')
     def test_search_movie(self):
-        """Test to search for a movie by title."""
-        params = {"keyword": "Тест"}  # Используйте данные из test_data.py при необходимости
+        params = {"keyword": "Тест"} 
         response = requests.get(f"{API_URL}/movies/search", headers={"X-API-KEY": TOKEN}, params=params)
         assert response.status_code == 200
         data = response.json()
@@ -29,7 +27,6 @@ class TestAPI:
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Get movie ratings')
     def test_get_movie_ratings(self):
-        """Test to get movie ratings by ID."""
         response = requests.get(f"{API_URL}/movies/{MOVIE_ID}/ratings", headers={"X-API-KEY": TOKEN})
         assert response.status_code == 200
         data = response.json()
@@ -38,7 +35,6 @@ class TestAPI:
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Check if a movie exists')
     def test_check_movie_exists(self):
-        """Test to check if a movie with given ID exists."""
         response = requests.get(f"{API_URL}/movies/{MOVIE_ID}", headers={"X-API-KEY": TOKEN})
         assert response.status_code == 200
         data = response.json()
@@ -47,6 +43,5 @@ class TestAPI:
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title('Handle movie not found error')
     def test_movie_not_found(self):
-        """Test to handle the case where movie is not found."""
         response = requests.get(f"{API_URL}/movies/9999999", headers={"X-API-KEY": TOKEN})
         assert response.status_code == 404  # Проверяем, что получаем ошибку 404
